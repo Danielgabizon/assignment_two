@@ -1,9 +1,9 @@
 const request = require("supertest");
-const app = require("../server");
+const initApp = require("../server");
 const mongoose = require("mongoose");
 const postsModel = require("../models/posts_model");
-const e = require("express");
 
+let app;
 const testPost = [
   {
     sender: 111,
@@ -18,6 +18,7 @@ const testPost = [
 ];
 beforeAll(async () => {
   console.log("Before all tests");
+  app = await initApp();
   await postsModel.deleteMany();
 });
 

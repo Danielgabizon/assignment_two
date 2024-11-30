@@ -1,6 +1,12 @@
-const app = require("./server");
+const initApp = require("./server");
 const port = process.env.PORT;
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+initApp()
+  .then((app) => {
+    app.listen(port, () => {
+      console.log(`Server running on http://localhost:${port}`);
+    });
+  })
+  .catch((error) => {
+    console.error("Failed to initialize app:", error);
+  });
