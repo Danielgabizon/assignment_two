@@ -1,10 +1,11 @@
 {
   "name": "assignment_two",
   "version": "1.0.0",
-  "main": "index.js",  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "author": "Daniel Gabizon",
   "license": "ISC",
@@ -17,7 +18,9 @@
     "mongose": "^0.0.2-security"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.7",
-    "prettier": "3.3.3"
+    "prettier": "3.3.3",
+    "supertest": "^7.0.0"
   }
 }

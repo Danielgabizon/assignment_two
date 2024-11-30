@@ -1,10 +1,6 @@
-/**
- * Daniel-Gabizon-212694657-Nir-Tshuva-318636891
- */
 const express = require("express");
 const app = express();
 const dotevn = require("dotenv").config();
-const port = process.env.PORT;
 
 const mongoose = require("mongoose");
 const connectToDatabase = async () => {
@@ -26,7 +22,4 @@ const comments_routes = require("./routes/comments_routes");
 app.use("/posts", posts_routes);
 app.use("/comments", comments_routes);
 
-// Start the Express server, listening on the port defined by the environment variable.
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+module.exports = app;
