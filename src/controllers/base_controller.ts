@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-
-class BaseController {
-  model: any;
-  constructor(model: any) {
+import { Model } from "mongoose";
+class BaseController<T> {
+  model: Model<T>;
+  constructor(model: Model<T>) {
     this.model = model;
   }
   async addNewItem(req: Request, res: Response): Promise<Response> {

@@ -1,11 +1,18 @@
 import mongoose from "mongoose";
+
+export interface IComment {
+  postid: mongoose.Schema.Types.ObjectId;
+  sender: number;
+  content: string;
+}
+
 const Schema = mongoose.Schema;
-const commentsSchema = new Schema({
-  postid: { 
+const commentsSchema = new Schema<IComment>({
+  postid: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post',
-    required: true
-   },
+    ref: "Post",
+    required: true,
+  },
   sender: {
     type: Number,
     required: true,
@@ -16,4 +23,4 @@ const commentsSchema = new Schema({
   },
 });
 
-export default mongoose.model("Comments", commentsSchema);
+export default mongoose.model<IComment>("Comments", commentsSchema);
