@@ -1,17 +1,13 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const commentsSchema = new Schema({
-  sender: {
-    type: Number,
-    required: true,
-  },
   postid: { 
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
     required: true
    },
-  title: {
-    type: String,
+  sender: {
+    type: Number,
     required: true,
   },
   content: {
@@ -20,4 +16,4 @@ const commentsSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Comments", commentsSchema);
+export default mongoose.model("Comments", commentsSchema);

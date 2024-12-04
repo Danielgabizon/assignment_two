@@ -1,10 +1,16 @@
-const request = require("supertest");
-const initApp = require("../server");
-const mongoose = require("mongoose");
-const postsModel = require("../models/posts_model");
-
-let app;
-const testPost = [
+import request from "supertest";
+import initApp from "../server";
+import mongoose from "mongoose";
+import postsModel from "../models/posts_model";
+import { Express } from "express";
+let app: Express;
+type mypost = {
+  sender: number;
+  title: string;
+  content: string;
+  _id?: string;
+};
+const testPost: mypost[] = [
   {
     sender: 111,
     title: "Test title 1",
@@ -29,7 +35,7 @@ afterAll(() => {
 
 describe("Posts test", () => {
   test("Create post", async () => {
-    for (let post of testPost) {
+    for (const post of testPost) {
       const response = await request(app).post("/posts").send(post);
       expect(response.statusCode).toBe(200);
       expect(response.body.status).toBe("Success");
