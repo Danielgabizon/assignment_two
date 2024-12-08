@@ -13,18 +13,25 @@ class BaseController<T> {
       return res.status(400).send({ status: "Error", message: err.message });
     }
   }
-
   async getAllItems(req: Request, res: Response): Promise<Response> {
     try {
-      const filter = req.query;
-      let items = [];
-      if (filter.sender) {
-        // if the query string contains a sender id, filter the data by that sender
-        items = await this.model.find({ sender: filter.sender });
-      } else {
-        // if there is no sender in the query string, get all data
-        items = await this.model.find();
+      // Build a dynamic filter object from query parameters
+      const filter: Record<string, any> = {};
+      // Handle filters for posts
+      if (req.query.sender) {
+        filter.sender = req.query.sender;
       }
+      if (req.query.title) {
+        filter.title = req.query.title;
+      }
+      // Handle filters for users
+      if (req.query.username) {
+        filter.username = req.query.username;
+      }
+      if (req.query.email) {
+        filter.email = req.query.email;
+      }
+      const items = await this.model.find(filter);
       return res.status(200).send({ status: "Success", data: items });
     } catch (err) {
       return res.status(400).send({ status: "Error", message: err.message });

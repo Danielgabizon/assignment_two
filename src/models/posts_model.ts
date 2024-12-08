@@ -1,25 +1,31 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
+// Interface for the Post document
 export interface IPost {
-  sender: number;
+  sender: mongoose.Types.ObjectId; // Refers to a User ID
   title: string;
   content: string;
 }
 
-const Schema = mongoose.Schema;
-const postsSchema = new Schema<IPost>({
+// Define the Posts schema
+const postSchema = new Schema<IPost>({
   sender: {
-    type: Number,
+    // Refers to the User ID
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: "User",
   },
   title: {
     type: String,
     required: true,
+    trim: true,
   },
   content: {
     type: String,
     required: true,
+    trim: true,
   },
 });
 
-export default mongoose.model<IPost>("Posts", postsSchema);
+// Export the model
+export default mongoose.model<IPost>("Post", postSchema);
