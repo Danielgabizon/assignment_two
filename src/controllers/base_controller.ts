@@ -15,7 +15,6 @@ class BaseController<T> {
   }
   async getAllItems(req: Request, res: Response): Promise<Response> {
     try {
-      // Build a dynamic filter object from query parameters
       const filter: Record<string, any> = {};
       // Handle filters for posts
       if (req.query.sender) {
